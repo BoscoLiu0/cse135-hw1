@@ -33,3 +33,33 @@ The site is served from my DigitalOcean Droplet (Ubuntu + Apache).
    ```bash
    cd /var/www/ucsdcse135.site/html
    git pull
+
+## step 4 - Basic Authentication for /team
+
+**Username:** grader  
+**Password:** 1234
+**Protected URL:** https://ucsdcse135.site/team/
+
+## Step 5 — Compression (gzip) verification
+
+**What I enabled**
+- Enabled Apache modules: `mod_deflate` (and `filter`, `headers`).
+- Added rules in `/etc/apache2/mods-enabled/deflate.conf`:
+
+## Step 6 — Obscure server identity
+
+To set a custom `Server` header, I used Apache ModSecurity instead of only
+`ServerTokens/ServerSignature` (those only hide version, not fully replace).
+
+Commands:
+- `sudo apt install libapache2-mod-security2 && sudo a2enmod security2`
+- Copied and enabled rules: `modsecurity.conf-recommended` → `modsecurity.conf`
+- Added: `SecServerSignature "CSE135 Server"` in `/etc/modsecurity/custom-server-header.conf`
+- Restarted Apache.
+
+Verification: Chrome DevTools → Network shows `Server: CSE135 Server` on the home page.
+
+## Step 7 — Configured custom 404 by adding:
+-ErrorDocument 404 /404.html
+
+-inside the ucsdcse135.site vhosts (HTTP and HTTPS). Verified by visiting a non-existent URL and seeing the custom page.
