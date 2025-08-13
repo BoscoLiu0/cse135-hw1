@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/style.css">
+  <title>HomePage</title>
+</head>
+<body>
+  <!-- Header with navigation and theme switch -->
+  <header class="nav-header">
+    <div class="nav-container">
+      <div class="site-title">CSE134B</div>
+      <!-- Main navigation menu -->
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="active">HomePage</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="contact.html">Contact Me</a></li>
+        </ul>
+      </nav>
+      <!-- Theme toggle switch (Light/Dark) -->
+      <div class="theme-switch-wrapper" aria-label="Theme Switch">
+        <span class="theme-switch-label" id="themeLabel">Light Mode</span>
+        <label class="theme-switch" for="themeToggle">
+          <input type="checkbox" id="themeToggle" aria-label="Toggle light/dark mode">
+          <span class="slider">
+            <span class="switch-text on">ON</span>
+            <span class="switch-text off">OFF</span>
+          </span>
+        </label>
+      </div>
+    </div>
+  </header>
+  <!-- Show warning if JavaScript is disabled -->
+  <noscript>
+    <div style="color:red;text-align:center;">Theme toggle requires JavaScript.</div>
+  </noscript>
+
+  <!-- Main content -->
+  <main id="main-content">
+    <!-- Welcome section -->
+    <section aria-labelledby="welcome-heading">
+      <h2 id="welcome-heading">Welcome to My Portfolio</h2>
+      <p>Hello! I'm glad you're here. This is the homepage of my personal portfolio site.</p>
+      <hr>
+      <p>
+        <strong>Note:</strong> This portfolio is <em>continuously evolving</em>, so check back often for updates on my <span>projects</span>.
+      </p>
+    </section>
+    <!-- Featured image section -->
+    <section aria-labelledby="featured-image-heading">
+      <h2 id="featured-image-heading">Featured Image</h2>
+      <figure>
+        <picture>
+          <source srcset="assets/index.webp" type="image/webp" />
+          <source srcset="assets/index.jpg" type="image/jpeg" />
+          <img src="assets/index.jpg" alt="A sample featured image" class="responsive-image">
+        </picture>
+        <figcaption>This is a placeholder image representing my portfolio.</figcaption>
+      </figure>
+    </section>
+    <!-- Quote section -->
+    <section aria-labelledby="quote-heading">
+      <h2 id="quote-heading">Quote</h2>
+      <blockquote cite="https://www.example.com">
+        "The only way to do great work is to love what you do." – Steve Jobs
+      </blockquote>
+    </section>
+    <!-- Progress bar section -->
+    <section aria-labelledby="progress-heading">
+      <h2 id="progress-heading">Progress</h2>
+      <label for="portfolio-progress">Portfolio Completion:</label>
+      <progress id="portfolio-progress" value="20" max="100">20%</progress>
+    </section>
+    <!-- Custom semantic section (example) -->
+    <section class="custom" aria-labelledby="custom-element-heading">
+  <h2 id="custom-element-heading">Custom Semantic Element</h2>
+  <p>This content is inside a semantic custom element.</p>
+
+  <section id="theme-customizer" aria-label="Theme Customizer" style="margin-top:2rem; padding:1rem; border:1px solid var(--primary-color); border-radius:0.5rem;">
+    <h3>Customize Theme</h3>
+    <div>
+      <button class="preset-theme-btn" data-theme="light" style="margin-right:0.5rem;">Light Theme</button>
+      <button class="preset-theme-btn" data-theme="dark" style="margin-right:0.5rem;">Dark Theme</button>
+      <button class="preset-theme-btn" data-theme="blue" style="margin-right:0.5rem;">Blue Theme</button>
+    </div>
+    <form id="customThemeForm" style="margin-top:1rem; display:flex; flex-wrap:wrap; gap:1rem; align-items:center;">
+      <label>
+        Background Color:
+        <input type="color" id="bgColorPicker" name="bgColor" value="#ffffff" aria-label="Background color picker" />
+      </label>
+      <label>
+        Text Color:
+        <input type="color" id="textColorPicker" name="textColor" value="#222222" aria-label="Text color picker" />
+      </label>
+      <label>
+        Font Family:
+        <select id="fontSelect" name="fontFamily" aria-label="Font family selector">
+          <option value="'Roboto', sans-serif" selected>Roboto</option>
+          <option value="'Arial', sans-serif">Arial</option>
+          <option value="'Georgia', serif">Georgia</option>
+          <option value="'Courier New', monospace">Courier New</option>
+        </select>
+      </label>
+      <button type="submit" style="padding:0.3rem 0.6rem; background-color: var(--primary-color); color: white; border: none; border-radius: 0.25rem; cursor: pointer;">
+        Apply Custom Theme
+      </button>
+    </form>
+    <p id="customThemeStatus" style="margin-top:0.5rem; color: var(--primary-color);"></p>
+  </section>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const presetButtons = document.querySelectorAll('.preset-theme-btn');
+    const bgColorPicker = document.getElementById('bgColorPicker');
+    const textColorPicker = document.getElementById('textColorPicker');
+    const fontSelect = document.getElementById('fontSelect');
+    const form = document.getElementById('customThemeForm');
+    const status = document.getElementById('customThemeStatus');
+
+    // Preset themes definitions
+    const themes = {
+      light: {
+        '--bg-color': '#ffffff',
+        '--text-color': '#222222',
+        '--font-body': "'Roboto', sans-serif"
+      },
+      dark: {
+        '--bg-color': '#181c1f',
+        '--text-color': '#f2f2f2',
+        '--font-body': "'Roboto', sans-serif"
+      },
+      blue: {
+        '--bg-color': '#e0f0ff',
+        '--text-color': '#003366',
+        '--font-body': "'Arial', sans-serif"
+      }
+    };
+
+    function applyTheme(themeObj) {
+      for (const [varName, value] of Object.entries(themeObj)) {
+        document.documentElement.style.setProperty(varName, value);
+      }
+    }
+
+    // Load saved custom theme or preset from localStorage
+    function loadSavedTheme() {
+      const savedTheme = localStorage.getItem('customTheme');
+      if (savedTheme) {
+        const theme = JSON.parse(savedTheme);
+        applyTheme(theme);
+        // Update pickers to reflect saved values
+        bgColorPicker.value = rgbToHex(getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim()) || '#ffffff';
+        textColorPicker.value = rgbToHex(getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim()) || '#222222';
+        fontSelect.value = getComputedStyle(document.documentElement).getPropertyValue('--font-body').trim().replace(/['"]/g, '') || "'Roboto', sans-serif";
+      }
+    }
+
+    // Helper to convert rgb(...) to hex
+    function rgbToHex(rgb) {
+      const rgbMatch = rgb.match(/^rgb\s*\(\s*(\d+),\s*(\d+),\s*(\d+)\s*\)$/);
+      if (!rgbMatch) return rgb; // already hex or invalid
+      return '#' + [1,2,3].map(i => {
+        const hex = parseInt(rgbMatch[i]).toString(16);
+        return hex.length === 1 ? '0' + hex : hex;
+      }).join('');
+    }
+
+    presetButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const themeName = btn.getAttribute('data-theme');
+        if (themes[themeName]) {
+          applyTheme(themes[themeName]);
+          localStorage.setItem('customTheme', JSON.stringify(themes[themeName]));
+          status.textContent = `Applied ${themeName} theme.`;
+          // Update pickers to match preset
+          bgColorPicker.value = rgbToHex(themes[themeName]['--bg-color']);
+          textColorPicker.value = rgbToHex(themes[themeName]['--text-color']);
+          fontSelect.value = themes[themeName]['--font-body'].replace(/['"]/g, '');
+        }
+      });
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const customTheme = {
+        '--bg-color': bgColorPicker.value,
+        '--text-color': textColorPicker.value,
+        '--font-body': `'${fontSelect.value}', sans-serif`
+      };
+      applyTheme(customTheme);
+      localStorage.setItem('customTheme', JSON.stringify(customTheme));
+      status.textContent = 'Custom theme applied and saved.';
+    });
+
+    loadSavedTheme();
+  });
+</script>
+  </main>
+
+  <!-- Footer with contact info and copyright -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <address>
+        Contact me at: <a href="mailto:yal144@ucsd.com">yal144@ucsd.com</a><br>
+      </address>
+      <p>
+        <small class="copyright-color">&copy; 2025 Yanhua Liu. All rights reserved.</small>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme switch script: handles toggle and saves preference to localStorage -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggle = document.getElementById('themeToggle');
+      const label = document.getElementById('themeLabel');
+      // Read saved theme from localStorage
+      const userTheme = localStorage.getItem('theme');
+      if (userTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        toggle.checked = true;         // Dark mode: switch ON
+        label.textContent = "Dark Mode";
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        toggle.checked = false;        // Light mode: switch OFF
+        label.textContent = "Light Mode";
+      }
+      // Toggle theme and update storage & label
+      toggle.addEventListener('change', function () {
+        if (toggle.checked) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+          label.textContent = "Dark Mode";
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+          localStorage.setItem('theme', 'light');
+          label.textContent = "Light Mode";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/style.css">
+    <title>Projects</title>
+</head>
+
+<body>
+    <header class="nav-header">
+        <div class="nav-container">
+          <div class="site-title">CSE134B</div>
+          <nav>
+            <ul class="nav-list">
+              <li><a href="index.html">HomePage</a></li>
+              <li><a href="about.html">About Me</a></li>
+              <li><a href="projects.html" class="active">Projects</a></li>
+              <li><a href="resume.html">Resume</a></li>
+              <li><a href="contact.html">Contact Me</a></li>
+            </ul>
+          </nav>
+
+          <!-- Improved accessible slider-style theme toggle with labels and animation -->
+          <div class="theme-switch-wrapper">
+            <span class="theme-switch-label" id="themeLabel">Light Mode</span>
+            <label class="theme-switch" aria-label="Toggle light/dark mode">
+              <input type="checkbox" id="themeToggle" />
+              <span class="slider">
+                <span class="switch-text on">ON</span>
+                <span class="switch-text off">OFF</span>
+              </span>
+            </label>
+          </div>
+          <noscript>
+            <div style="color:red;text-align:center;">Theme toggle requires JavaScript.</div>
+          </noscript>
+        </div>
+      </header>
+
+    <main>
+        <article>
+            <h2>Featured Project</h2>
+            <section>
+                <h3>Portfolio Website</h3>
+                <p>This project demonstrates my ability to create a semantically structured HTML website with multiple
+                    pages.</p>
+                <figure>
+                    <picture>
+                      <source srcset="assets/q1-800.webp" type="image/webp" media="(min-width: 800px)">
+                      <source srcset="assets/q1-480.webp" type="image/webp" media="(min-width: 480px)">
+                      <img src="assets/q1.jpg" alt="Screenshot of portfolio site" width="300" style="object-fit: cover; object-position: center;">
+                    </picture>
+                    <figcaption>Homepage of my portfolio site.</figcaption>
+                </figure>
+            </section>
+
+            <section>
+                <h3>Project Video</h3>
+                <video width="320" controls>
+                    <source src="assets/project-demo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.(will Update soon)
+                </video>
+            </section>
+            
+            <section>
+                <h3>Code Sample</h3>
+                <pre><code>&lt;section&gt;
+  &lt;h2&gt;Welcome&lt;/h2&gt;
+  &lt;p&gt;This is a sample code block.&lt;/p&gt;
+&lt;/section&gt;
+        </code></pre>
+            </section>
+
+            <section>
+                <h3>Definition List</h3>
+                <dl>
+                    <dt>HTML</dt>
+                    <dd>A markup language used for creating web pages.</dd>
+                    <dt>Semantic Tags</dt>
+                    <dd>Tags that convey meaning about the content inside them.</dd>
+                </dl>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <address>
+                Contact me at: <a href="mailto:yal144@ucsd.com">yal144@ucsd.com</a>
+            </address>
+            <p><small class="copyright-color">&copy; 2025 Yanhua Liu. All rights reserved.</small></p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle logic
+        document.addEventListener("DOMContentLoaded", function () {
+          const toggle = document.getElementById('themeToggle');
+          const label = document.getElementById('themeLabel');
+          // Read user's preference from localStorage
+          const userTheme = localStorage.getItem('theme');
+          if (userTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            toggle.checked = true;
+            label.textContent = "Dark Mode";
+          } else {
+            document.documentElement.removeAttribute('data-theme');
+            toggle.checked = false;
+            label.textContent = "Light Mode";
+          }
+          toggle.addEventListener('change', function () {
+            if (toggle.checked) {
+              document.documentElement.setAttribute('data-theme', 'dark');
+              localStorage.setItem('theme', 'dark');
+              label.textContent = "Dark Mode";
+            } else {
+              document.documentElement.removeAttribute('data-theme');
+              localStorage.setItem('theme', 'light');
+              label.textContent = "Light Mode";
+            }
+          });
+        });
+    </script>
+</body>
+
+</html>

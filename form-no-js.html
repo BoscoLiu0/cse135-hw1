@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/style.css">
+    <title>Contact</title>
+</head>
+
+<body>
+    <header class="nav-header">
+        <div class="nav-container">
+          <div class="site-title">CSE134B</div>
+          <nav>
+            <ul class="nav-list">
+              <li><a href="index.html">HomePage</a></li>
+              <li><a href="about.html">About Me</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="resume.html">Resume</a></li>
+              <li><a href="contact.html" class="active">Contact Me</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+    <main>
+        <section class="contact-form">
+            <h2>Get in Touch</h2>
+            <form 
+                aria-label="Contact form"
+                action="https://httpbin.org/post"
+                method="POST"
+                id="contactForm"
+            >
+                <fieldset>
+                    <legend>Contact Form</legend>
+
+                    <div class="form-group">
+                        <label for="name">Name: <span style="color:red">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="e.g. Bosco Liu" minlength="1" maxlength="30" pattern="^[A-Za-z\s]+$" title="Name should only contain letters and spaces.">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email: <span style="color:red">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com" maxlength="50">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comments">Comments: <span style="color:red">*</span></label>
+                        <textarea id="comments" name="comments" required placeholder="What can I do for you?" minlength="10" maxlength="500"></textarea>
+                    </div>
+
+                    <!-- hidden -->
+                    <input type="hidden" name="possible_bot" value="true">
+                    
+                    <!-- output element-->
+                     <output id="formError" aria-live="polite"></output>
+                     <output id="formInfo" aria-live="polite"></output>
+
+                    <button type="submit" class="submit-button">Submit</button>
+                </fieldset>
+            </form>
+        </section>
+
+        <section class="contact-address">
+            <h2>Address<span>📍</span></h2>
+            <address>
+                UC San Diego<br>
+                La Jolla, CA 92093<br>
+                United States
+            </address>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <address>
+                Contact me at: <a href="mailto:yal144@ucsd.com">yal144@ucsd.com</a>
+            </address>
+            <p><small>&copy; 2025 Yanhua Liu. All rights reserved.</small></p>
+        </div>
+    </footer>
+</body>
+
+</html>

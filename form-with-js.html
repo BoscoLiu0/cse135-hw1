@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/style.css">
+    <title>Contact</title>
+</head>
+
+<body>
+    <header class="nav-header">
+        <div class="nav-container">
+            <div class="site-title">CSE134B</div>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="index.html">HomePage</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="resume.html">Resume</a></li>
+                    <li><a href="contact.html" class="active">Contact Me</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="contact-form">
+            <h2>Get in Touch</h2>
+            <form aria-label="Contact form" action="https://httpbin.org/post" method="POST" id="contactForm">
+                <fieldset>
+                    <legend>Contact Form</legend>
+
+                    <div class="form-group">
+                        <label for="name">Name: <span style="color:red">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="e.g. Bosco Liu" >
+                        <output id="nameError" class="field-error"></output>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email: <span style="color:red">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com"> 
+                        <output id="emailError" class="field-error"></output>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comments">Comments: <span style="color:red">*</span></label>
+                        <textarea id="comments" name="comments" required placeholder="What can I do for you?"></textarea>
+                        <output id="commentsError" class="field-error"></output>
+                    </div>
+
+                    <!-- hidden -->
+                    <input type="hidden" name="possible_bot" value="true">
+
+                    <!-- output element-->
+                    <output id="formError" aria-live="polite"></output>
+                    <output id="formInfo" aria-live="polite"></output>
+
+                    <button type="submit" class="submit-button">Submit</button>
+                </fieldset>
+            </form>
+        </section>
+
+        <section class="contact-address">
+            <h2>Address<span>📍</span></h2>
+            <address>
+                UC San Diego<br>
+                La Jolla, CA 92093<br>
+                United States
+            </address>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <address>
+                Contact me at: <a href="mailto:yal144@ucsd.com">yal144@ucsd.com</a>
+            </address>
+            <p><small>&copy; 2025 Yanhua Liu. All rights reserved.</small></p>
+        </div>
+    </footer>
+
+/* for part3*/
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("contactForm");
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const commentsInput = document.getElementById("comments");
+        const nameError = document.getElementById("nameError");
+        const emailError = document.getElementById("emailError");
+        const commentsError = document.getElementById("commentsError");
+        const formInfo = document.getElementById("formInfo");
+        let form_errors = [];
+        const maxComments = 500;
+    
+        function logError(field, message) {
+            form_errors.push({
+                field, message, value: (form[field] ? form[field].value : undefined)
+            });
+        }
+    
+        function showError(el, msg) {
+            el.textContent = msg;
+            el.style.opacity = 1;
+            setTimeout(() => { el.style.opacity = 0; el.textContent = ""; }, 2200);
+        }
+    
+        // Mask name
+        nameInput.addEventListener("input", function () {
+            if (!/^[A-Za-z\s]*$/.test(nameInput.value)) {
+                nameInput.value = nameInput.value.replace(/[^A-Za-z\s]/g, "");
+                showError(nameError, "Name may only contain letters and spaces.");
+                logError("name", "illegal character");
+            }
+        });
+    
+        // Comment countdown
+        commentsInput.addEventListener("input", function () {
+            let left = maxComments - commentsInput.value.length;
+            formInfo.textContent = `${left} characters left`;
+            formInfo.style.color = left <= 50 ? "#e67e22" : "";
+            if (left < 0) {
+                showError(commentsError, "Too long!");
+                commentsInput.value = commentsInput.value.slice(0, maxComments);
+                logError("comments", "exceed max length");
+            }
+        });
+    
+        // JS validation  -> use for all commits
+        form.addEventListener("submit", function (e) {
+            nameError.textContent = emailError.textContent = commentsError.textContent = "";
+            form_errors = [];
+            let valid = true;
+    
+            if (!/^[A-Za-z\s]{1,30}$/.test(nameInput.value)) {
+                showError(nameError, "Name: 1-30 letters/spaces only.");
+                logError("name", "invalid");
+                valid = false;
+            }
+            if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailInput.value)) {
+                showError(emailError, "Email invalid.");
+                logError("email", "invalid");
+                valid = false;
+            }
+            if (commentsInput.value.length < 10 || commentsInput.value.length > maxComments) {
+                showError(commentsError, "10-500 chars required.");
+                logError("comments", "invalid");
+                valid = false;
+            }
+    
+            // form-errors 
+            let errInput = form.querySelector('input[name="form-errors"]');
+            if (!errInput) {
+                errInput = document.createElement('input');
+                errInput.type = 'hidden';
+                errInput.name = 'form-errors';
+                form.appendChild(errInput);
+            }
+            errInput.value = JSON.stringify(form_errors);
+    
+            if (!valid) e.preventDefault();
+        });
+    });
+    </script>
+
+</body>
+
+</html>

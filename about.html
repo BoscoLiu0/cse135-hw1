@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/style.css">
+    <title>About Me</title>
+</head>
+
+<body>
+    <header class="nav-header">
+        <div class="nav-container">
+          <div class="site-title">CSE134B</div>
+          <nav>
+            <ul class="nav-list">
+              <li><a href="index.html">HomePage</a></li>
+              <li><a href="about.html" class="active">About Me</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="resume.html">Resume</a></li>
+              <li><a href="contact.html">Contact Me</a></li>
+            </ul>
+          </nav>
+          <div class="theme-switch-wrapper">
+            <label class="theme-switch-label" for="theme-switch">
+              <span id="theme-switch-text">Light Mode</span>
+              <span class="theme-switch">
+                <input type="checkbox" id="theme-switch" aria-label="Toggle dark mode" />
+                <span class="slider round" aria-hidden="true"></span>
+              </span>
+            </label>
+            <noscript>
+              <style>.theme-switch-wrapper{display:none;}</style>
+              <div style="color:red;text-align:center;">Theme toggle requires JavaScript.</div>
+            </noscript>
+          </div>
+        </div>
+      </header>
+
+    <main>
+        <article>
+            <h2>Personal Introduction</h2>
+            <p>Hello! I'm <b>Yanhua Liu</b>, a <strong>Computer Engineering</strong> student passionate about web
+                development, design, and user-centered experiences.</p>
+            <p>I love exploring how technology can be used to enhance everyday life.</p>
+        </article>
+
+        <aside>
+            <h3>Hobbies</h3>
+            <ul>
+                <li>📚 Reading</li>
+                <li>🎮 Gaming</li>
+                <li>🎨 Sketching</li>
+            </ul>
+        </aside>
+
+        <section>
+            <h2>Timeline</h2>
+            <ul>
+                <li>2019: Started college</li>
+                <li>2022: Transferred to UCSD</li>
+                <li>2025: Expected graduation</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Highlights</h2>
+            <div class="highlights">
+                <dl>
+                    <dt><abbr title="University of California, San Diego">UCSD</abbr></dt>
+                    <dd>Top public research university located in La Jolla, CA.</dd>
+                    <dt>Transfer Journey</dt>
+                    <dd>From community college to a four-year university.</dd>
+                </dl>
+            </div>
+        </section>
+
+        <section>
+            <h2>Quote</h2>
+            <blockquote cite="https://example.com/quote">
+                "Success is not final, failure is not fatal: it is the courage to continue that counts."
+                <cite>– Winston Churchill</cite>
+            </blockquote>
+        </section>
+
+        <section>
+            <h2>Page Update Info</h2>
+            <p>This page is a work in progress. <ins>More updates coming soon!</ins></p>
+            <p><del>Old portfolio site is no longer maintained.</del></p>
+        </section>
+
+        <section>
+            <h2>Extra Credit Features</h2>
+
+            <h3>MathML Formula</h3>
+            <p>Below is Einstein's famous formula rendered using MathML:</p>
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                <mi>E</mi>
+                <mo>=</mo>
+                <mi>m</mi>
+                <msup>
+                    <mi>c</mi>
+                    <mn>2</mn>
+                </msup>
+            </math>
+
+            <h3>Why MathML Took So Long to Support</h3>
+            <p>MathML was part of the HTML specification for a long time, but major browsers lacked native support, making it difficult to use. Developers had to rely on JavaScript libraries like MathJax. Only recently have browsers like Safari and Firefox added better support, as shown on <a href="https://caniuse.com/?search=mathml" target="_blank">caniuse.com</a>.</p>
+
+            <h3>SEO with Meta Tags</h3>
+            <p>This site includes meta tags in the head for description and author information to improve search engine optimization and social sharing.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <address>
+                Contact me at: <a href="mailto:yal144@ucsd.edu">yal144@ucsd.edu</a>
+            </address>
+            <p><small class="copyright-color">&copy; 2025 Yanhua Liu. All rights reserved.</small></p>
+        </div>
+    </footer>
+    <script>
+      // Theme toggle logic using slider switch and localStorage
+      document.addEventListener("DOMContentLoaded", function () {
+        const themeSwitch = document.getElementById('theme-switch');
+        const themeSwitchText = document.getElementById('theme-switch-text');
+        // Helper to set theme and label
+        function setTheme(dark) {
+          if (dark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            themeSwitch.checked = true;
+            themeSwitchText.textContent = 'Dark Mode';
+          } else {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            themeSwitch.checked = false;
+            themeSwitchText.textContent = 'Light Mode';
+          }
+        }
+        // Initialize from localStorage or system preference
+        const userTheme = localStorage.getItem('theme');
+        if (userTheme === 'dark') {
+          setTheme(true);
+        } else if (userTheme === 'light') {
+          setTheme(false);
+        } else {
+          // If not set, use system preference
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          setTheme(prefersDark);
+        }
+        // Listen for toggle
+        themeSwitch.addEventListener('change', function () {
+          setTheme(themeSwitch.checked);
+        });
+      });
+    </script>
+</body>
+
+</html>

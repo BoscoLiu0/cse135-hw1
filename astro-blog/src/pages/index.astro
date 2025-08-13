@@ -1,0 +1,67 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main id="main-content">
+      <section aria-labelledby="welcome-heading">
+        <h2 id="welcome-heading">Welcome to My Portfolio</h2>
+        <p>Hello! I'm glad you're here. This is the homepage of my personal portfolio site.</p>
+        <hr />
+        <p>
+          <strong>Note:</strong> This portfolio is <em>continuously evolving</em>, so check back often for updates on my <span>projects</span>.
+        </p>
+      </section>
+
+      <section aria-labelledby="featured-image-heading">
+        <h2 id="featured-image-heading">Featured Image</h2>
+        <figure>
+          <picture>
+            <source srcset="/assets/index.webp" type="image/webp" />
+            <source srcset="/assets/index.jpg" type="image/jpeg" />
+            <img src="/assets/index.jpg" alt="A sample featured image" class="responsive-image" />
+          </picture>
+          <figcaption>This is a placeholder image representing my portfolio.</figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="quote-heading">
+        <h2 id="quote-heading">Quote</h2>
+        <blockquote cite="https://www.example.com">
+          "The only way to do great work is to love what you do." – Steve Jobs
+        </blockquote>
+      </section>
+
+      <section aria-labelledby="progress-heading">
+        <h2 id="progress-heading">Progress</h2>
+        <label for="portfolio-progress">Portfolio Completion:</label>
+        <progress id="portfolio-progress" value="20" max="100">20%</progress>
+      </section>
+
+      <section class="custom" aria-labelledby="custom-element-heading">
+        <h2 id="custom-element-heading">Custom Semantic Element</h2>
+        <p>This content is inside a semantic custom element.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <address>
+          Contact me at: <a href="mailto:yal144@ucsd.com">yal144@ucsd.com</a><br />
+        </address>
+        <p>
+          <small class="copyright-color">&copy; 2025 Yanhua Liu. All rights reserved.</small>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

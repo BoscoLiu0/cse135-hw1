@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
+---
+
+<!-- Use your site’s common layout -->
+<Layout
+  title="About Me"
+  description="Learn more about me, my background, and experience."
+  pubDate={new Date('2025-07-24')}
+  heroImage={AboutHeroImage}
+>
+
+  <section>
+    <h1>About Me</h1>
+    <p>
+      Hello! I am Bosco Liu, a Computer Engineering student at UCSD, graduating in 2025.
+      I am passionate about web development, systems programming, and exploring new
+      technologies like Astro for static site generation.
+    </p>
+
+    <p>
+      This portfolio site showcases my projects, skills, and experiences. I continuously
+      update it to reflect my growth and achievements.
+    </p>
+
+    <p>
+      Outside of coding, I enjoy reading tech blogs, hiking, and gaming.
+    </p>
+  </section>
+
+  <section>
+    <h2>My Skills</h2>
+    <ul>
+      <li>HTML, CSS, JavaScript</li>
+      <li>React, Astro, Node.js</li>
+      <li>C, C++, Java</li>
+      <li>Git, Agile Development</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>
+      Feel free to reach out to me at
+      <a href="mailto:yal144@ucsd.com">yal144@ucsd.com</a>.
+    </p>
+  </section>
+
+</Layout>
